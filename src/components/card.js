@@ -1,22 +1,23 @@
-export function createCard(cardData, deleteCard, openPopupImage, cardLikeActive) {
+import { cardsContainer, openPopupImage } from './index.js';
+
+
+export function createCard(cardData) {
   const cardTemplate = document.querySelector('#card-template').content;
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
   const cardTitle = cardElement.querySelector('.card__title');
   const deleteButton = cardElement.querySelector('.card__delete-button');
   const cardLikeButton = cardElement.querySelector('.card__like-button');
-  const nameValue= cardData.name;
-  const linkValue = cardData.link;
 
-  cardTitle.textContent = nameValue;
-  cardImage.src = linkValue;
-  cardImage.alt = nameValue;
+  cardTitle.textContent = cardData.name;
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
 
   deleteButton.addEventListener('click', () => deleteCard(cardElement));
 
   cardImage.addEventListener('click', () => openPopupImage(cardData));
   
-  cardLikeActive = cardLikeButton.addEventListener('click', () => {
+  cardLikeButton.addEventListener('click', () => {
     if (cardLikeButton.classList.contains('card__like-button')) {
       cardLikeButton.classList.toggle('card__like-button_is-active');
     };
@@ -31,12 +32,7 @@ export function deleteCard(cardElement) {
 };
 
 
-/* export function addNewCard (evt, cardElement) {
-  evt.preventDefault();
-  const inputCardName = cardElement.querySelector('.popup__input_type_card-name');
-  const inputCardUrl =  cardElement.querySelector('.popup__input_type_url');
-
-  const addCard = 
-  
-  closeModal(addNewCard);
-} */
+export function cardFormSubmit (cardElement) {
+  const addCard = createCard(cardElement);
+  cardsContainer.prepend(addCard);
+};
