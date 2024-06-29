@@ -1,7 +1,4 @@
-import { cardsContainer, openPopupImage } from './index.js';
-
-
-export function createCard(cardData) {
+export function createCard(cardData, deleteCard, openPopupImage) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
@@ -29,10 +26,4 @@ export function createCard(cardData) {
 
 export function deleteCard(cardElement) {
   cardElement.remove();
-};
-
-
-export function cardFormSubmit (cardElement) {
-  const addCard = createCard(cardElement);
-  cardsContainer.prepend(addCard);
 };
