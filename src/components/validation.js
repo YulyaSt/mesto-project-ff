@@ -51,24 +51,20 @@ export const enableValidation = (validationConfig) => {
   const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
 
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-
     setEventListeners(formElement, validationConfig);
   });
 };
 
 
 export const clearValidation = (formElement, validationConfig) => {
-  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector)
-  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector))
+  const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
 
   inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement, validationConfig)
+    hideInputError(formElement, inputElement, validationConfig);
   });
 
-  toggleButtonState(inputList, buttonElement, validationConfig)
+  toggleButtonState(inputList, buttonElement, validationConfig);
 };
 
 

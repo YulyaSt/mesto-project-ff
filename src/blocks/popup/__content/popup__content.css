@@ -18,7 +18,7 @@
   }
 }
 
-.popup_delete-image .popup__content {
+.popup_type_delete-image .popup__content {
   min-height: 0;
 }
 

@@ -1,16 +1,14 @@
 export function openModal(popup) {
-  popup.classList.add('popup_is-animated');
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closeModalEsc);
-  document.addEventListener('mousedown', overlayClickModal);
+  popup.addEventListener('mousedown', overlayClickModal);
 };
 
 
 export function closeModal(popup) {
-  popup.classList.add('popup_is-animated');
   popup.classList.remove('popup_is-opened');
   document.removeEventListener('keydown', closeModalEsc);
-  document.removeEventListener('mousedown', overlayClickModal);
+  popup.removeEventListener('mousedown', overlayClickModal);
 };
 
 

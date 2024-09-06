@@ -1,4 +1,4 @@
-import { deleteUserCard, getLikesCard, deleteLikeCard } from './api.js';
+import { getLikesCard, deleteLikeCard } from './api.js';
 
 
 const cardTemplate = document.querySelector('#card-template').content;
@@ -27,9 +27,8 @@ function createCard(cardData, userId, openPopupImage, deleteCard, addLikeCard) {
 
   if (cardData.owner._id === userId) {
     deleteButton.classList.add('card__delete-button_active')
-    deleteButton.addEventListener("click", function (evt) {
-      const newCard = evt.target.closest('.card');
-      deleteCard(newCard);
+    deleteButton.addEventListener("click", () => {
+      deleteCard(cardId, cardElement);
     }); 
   } else {
     deleteButton.remove();
@@ -39,21 +38,12 @@ function createCard(cardData, userId, openPopupImage, deleteCard, addLikeCard) {
   cardLikeButton.addEventListener('click', (evt) =>  addLikeCard(evt, cardId, cardLikeValue));
 
 
-  cardImage.addEventListener('click', () => openPopupImage);
+  cardImage.addEventListener("click", () => {
+    openPopupImage(cardImage.src, cardImage.alt, cardTitle.textContent);
+  });
 
 
   return cardElement;
-};
-
-
-function deleteCard (cardElement) {
-  deleteUserCard(cardElement.dataset.cardId)
-    .then(() => {
-      cardElement.remove();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
 };
 
 
@@ -70,4 +60,4 @@ function addLikeCard (evt, cardId, cardLikeValue) {
   };
 
 
-export { createCard, deleteCard, addLikeCard };
+export { createCard, addLikeCard };
