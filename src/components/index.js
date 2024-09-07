@@ -1,5 +1,5 @@
 import '../pages/index.css';
-import { createCard, addLikeCard } from './card.js';
+import { createCard, addLikeCard, deleteCard } from './card.js';
 import { openModal, closeModal } from './modal.js';
 import { enableValidation, clearValidation } from './validation.js';
 import { getInfoProfile, getInitialCards, editProfileInfo, addNewCard, updateAvatarUser, deleteUserCard } from './api.js';
@@ -192,6 +192,15 @@ addButton.addEventListener('click', (evt) => {
 newCard.addEventListener('submit', processNewCardSubmit);
 
 
+function renderLoadingDelete(isLoading, button) {
+  if (isLoading) {
+    button.textContent = "Удаление...";
+  } else {
+    button.textContent = "Да";
+  }
+};
+
+
 // Открытие модального окна удаления карточки
 function deleteCardPopup(cardId, cardElement) {
   openModal(popupDeleteCard);
@@ -204,13 +213,19 @@ function deleteCardPopup(cardId, cardElement) {
 function processDeleteCardSubmit(evt){
   evt.preventDefault();
 
+  submitButton = formDelete.querySelector('.popup__button');
+  renderLoadingDelete(true, submitButton);
+
   deleteUserCard(cardToDelete)
     .then(() => {
-      elementCardToDelete.remove();
+      deleteCard(elementCardToDelete);
       closeModal(popupDeleteCard);
     })
     .catch(error => {
       console.error(error);
+    })
+    .finally(() => {
+      renderLoadingDelete(false, submitButton);
     });
 };
 

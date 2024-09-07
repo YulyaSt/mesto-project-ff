@@ -47,7 +47,7 @@ function createCard(cardData, userId, openPopupImage, deleteCard, addLikeCard) {
 };
 
 
-function addLikeCard (evt, cardId, cardLikeValue) {
+function addLikeCard(evt, cardId, cardLikeValue) {
   const like = evt.target.classList.contains("card__like-button_is-active") ? deleteLikeCard : getLikesCard;
   like(cardId) 
     .then((cardData) => {
@@ -60,4 +60,9 @@ function addLikeCard (evt, cardId, cardLikeValue) {
   };
 
 
-export { createCard, addLikeCard };
+  function deleteCard(cardElement) {
+    cardElement.remove();
+  };
+
+
+export { createCard, addLikeCard, deleteCard };
