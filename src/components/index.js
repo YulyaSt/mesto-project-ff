@@ -104,7 +104,7 @@ function processProfileSubmit(evt) {
     })
     .finally(() => {
       renderLoading(false, submitButton);
-    })
+    });
 };
 
 
@@ -130,16 +130,16 @@ function processAvatarSubmit(evt) {
   
   updateAvatarUser(inputAvaUrl.value)
     .then((res) => {
-      profileAvatar.style.backgroundImage = `url(${res.avatar})`
+      profileAvatar.style.backgroundImage = `url(${res.avatar})`;
 
-      closeModal(popupAvatar)
+      closeModal(popupAvatar);
     })
     .catch((error) => {
       console.log(error);
     })
     .finally(() => {
       renderLoading(false, submitButton);
-    })
+    });
 };
 
 
@@ -185,7 +185,7 @@ addButton.addEventListener('click', (evt) => {
   })
   .finally(() => {
     renderLoading(false, submitButton);
-  })
+  });
 };
 
 
@@ -197,7 +197,7 @@ function deleteCardPopup(cardId, cardElement) {
   openModal(popupDeleteCard);
   cardToDelete = cardId;
   elementCardToDelete = cardElement;
-}
+};
 
 
 // Удаление карточки после подтверждения 
